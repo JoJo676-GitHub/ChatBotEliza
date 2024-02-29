@@ -46,6 +46,7 @@ public class Chat {
             reader.close();
         } catch (IOException e) {
             e.printStackTrace();
+
         }
     }
 
