@@ -38,8 +38,7 @@ public class Chat {
                     zeilenWorte.add(word);
                     ArrayList<Integer> places = new ArrayList<>();
                     bagOfWords.putIfAbsent(word, places);// wenn in dem Bag of words in der Spalte vom INT noch keine ArrayList ist, wird diese hinzugefügt
-//                    places.add(dictionary.size() - 1);//"add" fügt zu der ^ Liste hinzu
-                    bagOfWords.get(word).add(dictionary.size() - 1);
+                    bagOfWords.get(word).add(dictionary.size() - 1);//"add" fügt zu der ^ Liste hinzu
                 }
             }
 
