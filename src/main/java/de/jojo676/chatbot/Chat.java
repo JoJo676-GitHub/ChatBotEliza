@@ -15,7 +15,7 @@ public class Chat {
     public Chat() { //Phrase in bestandteile zerlegen und bei einzelnen wörtern auf Phrase zeigen
 
         try {
-            reader = new BufferedReader(new FileReader("C:\\Users\\Johan\\IdeaProjects\\ChatBotOhneKI\\src\\main\\resources\\openthesaurus.txt"));
+            reader = new BufferedReader(new FileReader("src/main/resources/openthesaurus.txt"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -58,6 +58,7 @@ public class Chat {
             reader.close();
         } catch (IOException e) {
             e.printStackTrace();
+
         }
     }
 
