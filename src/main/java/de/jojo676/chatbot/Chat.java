@@ -19,15 +19,9 @@ public class Chat {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        // Methode random hallo
-        answers = Map.of(
-                "traurig", "Das tut mir leid zu hören",
-                "hallo", "Hallo, wie geht es dir?",
-                "vater", "Erzähl mir mehr von deiner Familie",
-                "gut", "Das freut mich zu hören!",
-                "wie geht's", "Mir geht es gut, danke der Nachfrage",
-                "tschüs", "Auf wiedersehen, es hat mich gefreut mit dir Bekanntschaft zu machen!"
-        );
+
+        answers = Map.of("traurig", "Das tut mir leid zu hören", "hallo", "Hallo, wie geht es dir?",   // Methode random hallo
+                "vater", "Erzähl mir mehr von deiner Familie", "gut", "Das freut mich zu hören!", "wie geht's", "Mir geht es gut, danke der Nachfrage", "tschüs", "Auf wiedersehen, es hat mich gefreut mit dir Bekanntschaft zu machen");
 
         try {
 
@@ -42,15 +36,10 @@ public class Chat {
 
                     word = word.strip();
                     zeilenWorte.add(word);
-
-                    if (bagOfWords.containsKey(word)) {
-                        bagOfWords.get(word).add(dictionary.size() - 1);
-                    } else {
-                        ArrayList<Integer> places = new ArrayList<>();
-                        bagOfWords.put(word, places); // wenn in dem Bag of words in der Spalte vom INT noch keine ArrayList ist, wird diese hinzugefügt
-                        places.add(dictionary.size() - 1); //"add" fügt zu der ^ Liste hinzu
-                    }
-
+                    ArrayList<Integer> places = new ArrayList<>();
+                    bagOfWords.putIfAbsent(word, places);// wenn in dem Bag of words in der Spalte vom INT noch keine ArrayList ist, wird diese hinzugefügt
+//                    places.add(dictionary.size() - 1);//"add" fügt zu der ^ Liste hinzu
+                    bagOfWords.get(word).add(dictionary.size() - 1);
                 }
             }
 
@@ -67,12 +56,12 @@ public class Chat {
         if (bagOfWords.get(key) != null) {
             ArrayList<String> allSynonyms = new ArrayList<>();
             for (int i = 0; i < bagOfWords.get(key).size(); i++) {
+//                System.out.println(dictionary.get(bagOfWords.get(key).get(i)));
                 allSynonyms.addAll(dictionary.get(bagOfWords.get(key).get(i)));
             }
             System.out.println(findKeyWord(allSynonyms));
-            System.out.println("----------------------------\n" + ">>>>>>>>>>>>>>>>>>>>>>>>>>>>"+ allSynonyms + "\n----------------------------");
         } else {
-            System.out.println("Leider ist mir dieser Ausdruck nicht bekannt");
+            System.out.println("Fehler");
         }
     }
 
@@ -83,8 +72,8 @@ public class Chat {
             if (!scannerOutput.isEmpty()) {
                 input.add(scannerOutput);
 
-                for (String key : input) {
-                    findSynonyms(key);
+                for (String s : input) {
+                    findSynonyms(s);
                 }
             }
 
@@ -94,9 +83,7 @@ public class Chat {
 
     public String findKeyWord(ArrayList<String> synonyms) {
 
-//        System.out.println(synonyms+ "\n");
-
-
+//        System.out.println(synonyms);
         for (String synonym : synonyms) {
             if (answers.containsKey(synonym)) {
                 return answers.get(synonym);
@@ -109,7 +96,7 @@ public class Chat {
 
         uncleared = uncleared.toLowerCase();
         uncleared = uncleared.replaceAll("\\([^)]*\\)", "");
-        uncleared = uncleared.replaceAll("`|~|!|@|\\$|%|\\^|&|\\*|\\(|\\)|\\+|=|\\[|\\{|]|}|\\||\\\\|,|\\.|\\?|/|\"\"|:", "");
+        uncleared = uncleared.replaceAll("`|~|!|@|\\$|%|\\^|&|\\*|\\(|\\)|\\+|=|\\[|\\{|]|}|\\||\\\\|<|,|\\.|>|\\?|/|\"\"|:", "");
         uncleared = uncleared.strip();
         return uncleared;
     }
