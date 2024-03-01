@@ -69,6 +69,7 @@ public class Chat {
                 allSynonyms.addAll(dictionary.get(bagOfWords.get(key).get(i)));
             }
             System.out.println(findKeyWord(allSynonyms));
+            System.out.println("----------------------------\n" + ">>>>>>>>>>>>>>>>>>>>>>>>>>>>"+ allSynonyms + "\n----------------------------");
         } else {
             System.out.println("Leider ist mir dieser Ausdruck nicht bekannt");
         }
@@ -92,7 +93,7 @@ public class Chat {
 
     public String findKeyWord(ArrayList<String> synonyms) {
 
-        System.out.println(synonyms);
+//        System.out.println(synonyms+ "\n");
 
 
         for (String synonym : synonyms) {
